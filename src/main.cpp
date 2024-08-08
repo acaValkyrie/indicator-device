@@ -19,9 +19,9 @@ auto incorrectColor = pixels.Color(luminus, 0, 0);
 
 void loop(){
   if (Serial.available() > 0){
-    String receive = Serial.readString();
+    String receive = Serial.readStringUntil('\n');
     for(u_int i = 0; i < LED_COUNT; i++){
-      if (i >= receive.length() - sizeof('\n')/sizeof(char) - 1){
+      if (i >= receive.length()){
         pixels.setPixelColor(i, pixels.Color(0, 0, 0));
         continue;
       }
@@ -34,7 +34,7 @@ void loop(){
     lastSerialTime_ms = millis();
   }else{
     int currentTime_ms = millis();
-    if(currentTime_ms - lastSerialTime_ms > 1000){
+    if(currentTime_ms - lastSerialTime_ms > 1500){
       for(int i = 0; i < LED_COUNT; i++){
         pixels.setPixelColor(i, pixels.Color(0, 0, 0));
       }
@@ -42,5 +42,5 @@ void loop(){
   }
   pixels.show();
   delay(500);
-  pixels.clear();
+  // pixels.clear();
 }
