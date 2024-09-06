@@ -6,16 +6,17 @@
 
 Adafruit_NeoPixel pixels(LED_COUNT, LED_PIN, NEO_RGB + NEO_KHZ800);
 
+int lastSerialTime_ms = 0;
+const int luminus = 20;
+auto correctColor = pixels.Color(0, luminus, luminus*0.2);
+auto incorrectColor = pixels.Color(luminus, 0, 0);
+
 void setup(){
   pixels.begin();
   pixels.clear();
   pixels.show();
   Serial.begin(9600);
 }
-int lastSerialTime_ms = 0;
-const int luminus = 20;
-auto correctColor = pixels.Color(0, luminus, 0);
-auto incorrectColor = pixels.Color(luminus, 0, 0);
 
 void loop(){
   if (Serial.available() > 0){
