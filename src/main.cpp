@@ -35,7 +35,7 @@ void loop(){
     lastSerialTime_ms = millis();
   }else{
     int currentTime_ms = millis();
-    if(currentTime_ms - lastSerialTime_ms > 1500){
+    if(currentTime_ms - lastSerialTime_ms > 12000){
       for(int i = 0; i < LED_COUNT; i++){
         pixels.setPixelColor(i, pixels.Color(0, 0, 0));
       }
